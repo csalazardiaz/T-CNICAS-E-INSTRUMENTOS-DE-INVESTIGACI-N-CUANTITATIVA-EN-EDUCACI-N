@@ -33,5 +33,6 @@ button { cursor: pointer; background: #22335f; }
 .output { background: #0b132a; }
 .hidden { display: none; }
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: grid; place-items: center; }
+.modal.hidden { display: none; }
 .modal-content { width: min(560px, 95vw); background: #111a34; border: 1px solid #334372; border-radius: .8rem; padding: 1rem; }
 .alert-danger { color: var(--danger); font-weight: 700; }
