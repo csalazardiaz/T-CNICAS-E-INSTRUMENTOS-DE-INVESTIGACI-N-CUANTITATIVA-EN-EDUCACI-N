@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Cuantitativo en Educación</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Lab Cuantitativo en Educación</h1>
+    <p>Aprender haciendo: investigación cuantitativa aplicada.</p>
+  </header>
+
+  <nav id="tabs" aria-label="Herramientas">
+    <button class="tab active" data-tab="operacionalizacion">1) Constructor de Operacionalización</button>
+    <button class="tab" data-tab="cvr">2) Juicio de Expertos (CVR)</button>
+    <button class="tab" data-tab="disenos">3) Diseños Experimentales</button>
+    <button class="tab" data-tab="navegador">4) Navegador Estadístico</button>
+    <button class="tab" data-tab="muestreo">5) Muestreo y Potencia</button>
+    <button class="tab" data-tab="hipotesis">6) Generador de Hipótesis</button>
+  </nav>
+
+  <main>
+    <section id="operacionalizacion" class="panel active">
+      <h2>Constructor de Operacionalización</h2>
+      <div class="grid two">
+        <label>Variable
+          <input id="varName" placeholder="Ej. Clima Escolar" />
+        </label>
+        <label>Dimensión
+          <input id="dimName" placeholder="Ej. Seguridad" />
+          <button id="addDimension">Añadir dimensión</button>
+        </label>
+      </div>
+
+      <div class="card">
+        <h3>Dimensiones e indicadores</h3>
+        <div id="dimensionsList"></div>
+      </div>
+      <button id="exportSpecs">Exportar tabla CSV</button>
+      <p id="specValidation" class="hint"></p>
+    </section>
+
+    <section id="cvr" class="panel">
+      <h2>Simulador de Juicio de Expertos (Lawshe)</h2>
+      <div class="grid three">
+        <label>Número de expertos
+          <input id="numExperts" type="number" min="3" value="7" />
+        </label>
+        <label>Número de ítems
+          <input id="numItems" type="number" min="1" value="10" />
+        </label>
+        <button id="buildCvrTable">Generar escenario</button>
+      </div>
+      <div id="cvrTableWrap"></div>
+      <p id="cvrSummary" class="hint"></p>
+    </section>
+
+    <section id="disenos" class="panel">
+      <h2>Laboratorio de Diseños Experimentales</h2>
+      <p>Selecciona y ordena componentes para construir el diseño:</p>
+      <div class="chips" id="designPalette"></div>
+      <div class="dropzone" id="designSequence"></div>
+      <div class="grid two">
+        <button id="clearDesign">Limpiar</button>
+        <button id="evaluateDesign">Evaluar diseño</button>
+      </div>
+      <p id="designResult" class="hint"></p>
+    </section>
+
+    <section id="navegador" class="panel">
+      <h2>Navegador Estadístico</h2>
+      <div class="grid three">
+        <label>Objetivo
+          <select id="goal">
+            <option value="comparar">Comparar grupos</option>
+            <option value="asociar">Asociar variables</option>
+          </select>
+        </label>
+        <label>Normalidad
+          <select id="normality">
+            <option value="si">Sí (paramétrico)</option>
+            <option value="no">No (no paramétrico)</option>
+          </select>
+        </label>
+        <label>Diseño
+          <select id="designType">
+            <option value="2ind">2 muestras independientes</option>
+            <option value="2rel">2 muestras relacionadas</option>
+            <option value="mind">Más de 2 independientes</option>
+            <option value="mrel">Más de 2 relacionadas</option>
+          </select>
+        </label>
+      </div>
+      <button id="suggestTest">Sugerir prueba</button>
+      <p id="testSuggestion" class="hint"></p>
+    </section>
+
+    <section id="muestreo" class="panel">
+      <h2>Calculadora Visual de Muestreo</h2>
+      <div class="grid two">
+        <label>Población (N, opcional)
+          <input id="N" type="number" min="1" placeholder="Dejar vacío = infinita" />
+        </label>
+        <label>Nivel de confianza (Z)
+          <select id="Z">
+            <option value="1.64">90%</option>
+            <option value="1.96" selected>95%</option>
+            <option value="2.58">99%</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid two">
+        <label>Error (e): <span id="eVal">0.05</span>
+          <input id="e" type="range" min="0.01" max="0.1" step="0.005" value="0.05" />
+        </label>
+        <label>Probabilidad (p): <span id="pVal">0.50</span>
+          <input id="p" type="range" min="0.1" max="0.9" step="0.05" value="0.5" />
+        </label>
+      </div>
+      <button id="calcSample">Calcular n</button>
+      <p id="sampleResult" class="hint"></p>
+      <div class="bar-wrap"><div id="sampleBar"></div></div>
+    </section>
+
+    <section id="hipotesis" class="panel">
+      <h2>Generador de Hipótesis y Variables</h2>
+      <div class="grid two">
+        <label>Alcance
+          <select id="scope">
+            <option>Correlacional</option>
+            <option>Comparativo</option>
+            <option>Explicativo</option>
+            <option>Descriptivo</option>
+          </select>
+        </label>
+        <label>Variable Independiente (VI)
+          <input id="vi" placeholder="Ej. Método de enseñanza" />
+        </label>
+      </div>
+      <div class="grid two">
+        <label>Variable Dependiente (VD)
+          <input id="vd" placeholder="Ej. Comprensión lectora" />
+        </label>
+        <button id="generateHyp">Generar</button>
+      </div>
+      <pre id="hypOutput" class="output"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <small>Diseñado para cursos de Técnicas e Instrumentos de Investigación Cuantitativa en Educación.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
